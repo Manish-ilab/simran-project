@@ -9,34 +9,43 @@
   --color-muted-foreground: hsl(var(--muted-foreground));
   --color-accent: hsl(var(--accent));
   --color-accent-foreground: hsl(var(--accent-foreground));
-  --color-border: hsl(var(--border));
+  --color-border: var(--border);
 
   --font-heading: var(--font-heading), sans-serif;
   --font-body: var(--font-body), sans-serif;
+
+  /* Designer Palette */
+  --color-rose: #f9e4ea;
+  --color-rose-mid: #e8b4c4;
+  --color-rose-dark: #b5607e;
+  --color-lavender: #ede8f9;
+  --color-lavender-mid: #c5b8ef;
+  --color-lavender-dark: #7c69c4;
+  --color-mint: #e3f5ee;
+  --color-mint-mid: #9ed9be;
+  --color-mint-dark: #3a8f68;
+  --color-peach: #fdf0e6;
+  --color-peach-mid: #f5c9a0;
+  --color-peach-dark: #c07035;
+  --color-sky: #e6f2fb;
+  --color-sky-mid: #a8cff0;
+  --color-sky-dark: #3a7fc1;
+  --color-cream: #fdf8f5;
+  --color-text-dark: #2c2228;
+  --color-text-mid: #6b5460;
+  --color-text-light: #a08898;
 }
 
 :root {
-  --background: 0 0% 100%;
-  --foreground: 222.2 84% 4.9%;
-  --primary: 222.2 47.4% 11.2%;
-  --primary-foreground: 210 40% 98%;
-  --muted: 210 40% 96.1%;
-  --muted-foreground: 215.4 16.3% 46.9%;
-  --accent: 210 40% 96.1%;
-  --accent-foreground: 222.2 47.4% 11.2%;
-  --border: 214.3 31.8% 91.4%;
-}
-
-.dark {
-  --background: 222.2 84% 4.9%;
-  --foreground: 210 40% 98%;
-  --primary: 210 40% 98%;
-  --primary-foreground: 222.2 47.4% 11.2%;
-  --muted: 217.2 32.6% 17.5%;
-  --muted-foreground: 215 20.2% 65.1%;
-  --accent: 217.2 32.6% 17.5%;
-  --accent-foreground: 210 40% 98%;
-  --border: 217.2 32.6% 17.5%;
+  --background: 28 40% 98%; /* Corresponding to --cream #fdf8f5 */
+  --foreground: 326 13% 15%; /* Corresponding to --text-dark #2c2228 */
+  --primary: 341 54% 54%; /* Corresponding to --rose-dark #b5607e */
+  --primary-foreground: 28 40% 98%;
+  --muted: 257 33% 94%;
+  --muted-foreground: 325 15% 56%;
+  --accent: 257 33% 94%;
+  --accent-foreground: 326 13% 15%;
+  --border: rgba(180, 120, 140, 0.15);
 }
 
 @layer base {
@@ -45,6 +54,9 @@
   }
   body {
     @apply bg-background text-foreground;
+    font-family: var(--font-body), sans-serif;
+    line-height: 1.7;
+    font-size: 15px;
   }
 }
 
@@ -53,22 +65,143 @@
   width: 8px;
 }
 ::-webkit-scrollbar-track {
-  background: hsl(var(--background));
+  background: var(--color-cream);
 }
 ::-webkit-scrollbar-thumb {
-  background: hsl(var(--muted-foreground) / 0.2);
+  background: var(--color-rose-mid);
   border-radius: 9999px;
   transition: background 0.2s;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: hsl(var(--muted-foreground) / 0.3);
+  background: var(--color-rose-dark);
 }
 
 /* Typography Enhancements */
-h1, h2, h3, h4, h5, h6 {
-  @apply tracking-tight font-heading;
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  @apply tracking-tight font-heading font-light;
 }
 
-.section-padding {
-  @apply py-20 px-6 md:px-12 lg:px-24;
+/* Portfolio Custom Classes */
+.deco {
+  @apply absolute rounded-full pointer-events-none;
+}
+.deco-1 {
+  @apply w-[500px] h-[500px] top-[-100px] right-[-100px] opacity-70;
+  background: radial-gradient(circle, #fbeef3 0%, transparent 70%);
+}
+.deco-2 {
+  @apply w-[300px] h-[300px] bottom-[50px] left-[-50px] opacity-70;
+  background: radial-gradient(circle, #ede8f9 0%, transparent 70%);
+}
+
+.professional-title {
+  @apply text-[11px] tracking-[0.15em] uppercase text-rose-dark font-medium inline-flex items-center gap-2 mb-[1.2rem];
+}
+.professional-title::before {
+  content: "";
+  @apply block w-6 h-[1px] bg-rose-dark;
+}
+
+.hero-desc {
+  @apply text-[15px] text-text-mid max-w-[420px] mb-[2.5rem] leading-[1.8];
+}
+
+.btn {
+  @apply px-7 py-3 rounded-full font-medium text-[13px] tracking-[0.04em] cursor-pointer transition-all duration-200 inline-block;
+}
+.btn-primary {
+  @apply bg-text-dark text-cream hover:bg-rose-dark;
+}
+.btn-outline {
+  @apply bg-transparent text-text-dark border border-rose-mid hover:bg-rose;
+}
+
+.photo-ring {
+  @apply w-[340px] h-[340px] rounded-full border-2 border-rose-mid flex items-center justify-center relative;
+}
+.photo-inner {
+  @apply w-[300px] h-[300px] rounded-full overflow-hidden;
+  background: linear-gradient(
+    135deg,
+    var(--color-rose) 0%,
+    var(--color-lavender) 100%
+  );
+}
+
+.badge {
+  @apply absolute bg-[rgba(255,255,255,0.7)] border border-border rounded-full px-4 py-2 backdrop-blur-md text-[12px] font-medium text-text-mid whitespace-nowrap;
+}
+.badge span {
+  @apply text-rose-dark font-medium;
+}
+
+.section-tag {
+  @apply text-[11px] tracking-[0.15em] uppercase text-rose-dark font-medium inline-block mb-[0.75rem];
+}
+
+.stat-card {
+  @apply bg-cream rounded-2xl border border-border p-5;
+}
+.stat-num {
+  @apply font-heading text-[2.5rem] font-light text-rose-dark leading-none mb-1;
+}
+.stat-label {
+  @apply text-[12px] text-text-light tracking-[0.05em];
+}
+
+.edu-block {
+  @apply mt-8 px-6 py-5 bg-lavender rounded-xl border-l-[3px] border-lavender-dark;
+}
+.edu-block h4 {
+  @apply text-[14px] font-medium text-lavender-dark mb-1;
+}
+
+.skill-card {
+  @apply bg-white rounded-2xl border border-border p-7 transition-transform duration-200 hover:-translate-y-1;
+}
+.skill-icon {
+  @apply w-11 h-11 rounded-xl flex items-center justify-center mb-4 text-[20px];
+}
+
+.tag {
+  @apply text-[11px] px-[10px] py-[3px] rounded-full;
+}
+
+.exp-item {
+  @apply grid grid-cols-[160px_1fr] gap-8 relative pb-10;
+}
+.exp-date {
+  @apply text-[14px] text-text-light pt-1 text-right font-medium;
+}
+.exp-company {
+  @apply text-[12px] font-medium text-rose-dark tracking-[0.06em] uppercase mb-[0.2rem];
+}
+.exp-role {
+  @apply text-[17px] font-medium mb-[0.75rem];
+}
+.exp-points {
+  @apply list-none;
+}
+.exp-points li {
+  @apply text-[14px] text-text-mid pl-4 relative leading-[1.6] py-1;
+}
+.exp-points li::before {
+  content: "";
+  @apply absolute left-0 top-3 w-1 h-1 rounded-full bg-rose-mid;
+}
+
+.project-card {
+  @apply bg-white rounded-[20px] border border-border overflow-hidden transition-transform duration-200 hover:-translate-y-[6px];
+}
+.project-thumb {
+  @apply h-40 flex items-center justify-center font-heading text-[3.5rem] font-light;
+}
+
+.contact-card {
+  @apply px-4 py-6 rounded-2xl border border-border bg-cream no-underline transition-all duration-200 hover:bg-rose hover:border-rose-mid hover:-translate-y-[3px];
 }

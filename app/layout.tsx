@@ -1,22 +1,24 @@
 import type { Metadata } from "next";
-import { Outfit, Sora } from "next/font/google";
+import { Cormorant_Garamond, DM_Sans } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/navbar";
 import Footer from "@/components/footer";
 
-const headingFont = Outfit({
+const headingFont = Cormorant_Garamond({
   subsets: ["latin"],
+  weight: ["300", "400", "500"],
   variable: "--font-heading",
 });
 
-const bodyFont = Sora({
+const bodyFont = DM_Sans({
   subsets: ["latin"],
+  weight: ["300", "400", "500"],
   variable: "--font-body",
 });
 
 export const metadata: Metadata = {
-  title: "Professional Portfolio | Senior Developer",
-  description: "Senior JavaScript Developer with 15+ years of experience building performant web applications.",
+  title: "Simran Shrestha — UI/UX Designer",
+  description: "UI/UX Designer based in Kathmandu, Nepal. Crafting intuitive digital experiences.",
 };
 
 export default function RootLayout({
@@ -25,9 +27,9 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className="dark">
+    <html lang="en">
       <body
-        className={`${bodyFont.variable} ${headingFont.variable} font-body bg-background text-foreground antialiased selection:bg-primary/20`}
+        className={`${bodyFont.variable} ${headingFont.variable} font-body bg-background text-foreground antialiased`}
       >
         <div className="relative min-h-screen flex flex-col">
           <Navbar />
